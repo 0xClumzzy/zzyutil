@@ -1,0 +1,62 @@
+name = "Reverse Engineering"
+
+[[data]]
+name = "Debuggers"
+description = "Runtime analysis and debugging tools"
+
+[[data.entries]]
+name = "GDB"
+description = "GNU debugger with pwndbg/peda/gef plugin support"
+script = "gdb.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "radare2"
+description = "Advanced reverse engineering framework with CLI and GUI"
+script = "radare2.sh"
+task_list = "I R"
+multi_select = true
+
+[[data]]
+name = "Binary Analysis"
+description = "Static binary analysis and disassembly"
+
+[[data.entries]]
+name = "objdump"
+description = "Disassemble ELF/PE binaries and inspect sections"
+script = "objdump.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "readelf"
+description = "Display ELF file structure information"
+script = "readelf.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "strings"
+description = "Extract printable strings from binary files"
+script = "strings_rev.sh"
+task_list = "I R"
+
+[[data]]
+name = "Dynamic Analysis"
+description = "Runtime tracing and monitoring"
+
+[[data.entries]]
+name = "strace"
+description = "Trace system calls and signals for a process"
+script = "strace.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "ltrace"
+description = "Trace library function calls for a process"
+script = "ltrace.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "Objdump (PLT/GOT)"
+description = "Inspect dynamic linking table entries"
+script = "objdump_got.sh"
+task_list = "I R"

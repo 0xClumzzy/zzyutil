@@ -1,0 +1,67 @@
+name = "Password Attacks"
+
+[[data]]
+name = "Hash Cracking"
+description = "Hashcat and hash-based cracking tools"
+
+[[data.entries]]
+name = "Hashcat"
+description = "World's fastest hash cracker with GPU support"
+script = "hashcat.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "John the Ripper"
+description = "CPU-based password cracking tool with many formats"
+script = "john.sh"
+task_list = "I R"
+
+[[data]]
+name = "Online Attacks"
+description = "Network authentication brute-force tools"
+
+[[data.entries]]
+name = "Hydra"
+description = "Parallelized network login brute-forcer (SSH, FTP, HTTP, SMB, etc.)"
+script = "hydra.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "Medusa"
+description = "Parallel network login brute-forcer (modular, fast)"
+script = "medusa.sh"
+task_list = "I R"
+
+[[data]]
+name = "Wordlist Tools"
+description = "Password list generation and processing"
+
+[[data.entries]]
+name = "Crunch"
+description = "Custom wordlist generator with character set patterns"
+script = "crunch.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "CeWL"
+description = "Custom wordlist generator by spidering websites"
+script = "cewl.sh"
+task_list = "I R"
+
+[[data]]
+name = "Archive Cracking"
+description = "Password-protected archive cracking"
+
+[[data.entries]]
+name = "fcrackzip"
+description = "Fast ZIP password cracker with dictionary & brute-force"
+script = "fcrackzip.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "John2Hashcat"
+description = "Convert John formats to Hashcat mode format"
+script = "john2hashcat.sh"
+task_list = "I R"

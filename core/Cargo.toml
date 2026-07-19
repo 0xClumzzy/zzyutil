@@ -1,0 +1,17 @@
+[package]
+name = "zzyutil_core"
+version = "0.1.0"
+description = "Core library for the zzyutil cybersecurity toolbox"
+authors = ["clumzzy"]
+license = "MIT"
+repository = "https://github.com/clumzzy/zzyutil"
+homepage = "https://github.com/clumzzy/zzyutil"
+edition = "2021"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+toml = "0.8"
+ego-tree = "0.6"
+include_dir = "0.7"
+which = "7"
+temp-dir = "0.2"

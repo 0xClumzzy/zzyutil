@@ -1,0 +1,69 @@
+name = "Reconnaissance"
+
+[[data]]
+name = "Port Scanning"
+description = "Network discovery and port scanning tools"
+
+[[data.entries]]
+name = "Nmap"
+description = "Powerful port scanner with OS detection, service versioning, and scripting engine"
+script = "nmap.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "RustScan"
+description = "Blazing-fast port scanner written in Rust (10k ports in 3s)"
+script = "rustscan.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "Masscan"
+description = "Asynchronous TCP port scanner capable of scanning entire internet in minutes"
+script = "masscan.sh"
+task_list = "I R"
+
+[[data]]
+name = "DNS Discovery"
+description = "DNS enumeration and subdomain discovery"
+
+[[data.entries]]
+name = "Subfinder"
+description = "Fast passive subdomain discovery tool"
+script = "subfinder.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "Amass"
+description = "In-depth DNS enumeration and OSINT subdomain discovery"
+script = "amass.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "dnsrecon"
+description = "DNS enumeration script for various record types and zone transfers"
+script = "dnsrecon.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "dnsenum"
+description = "Perl-based DNS enumeration for subdomains, transfers, and brute forcing"
+script = "dnsenum.sh"
+task_list = "I R"
+
+[[data]]
+name = "OSINT"
+description = "Open-source intelligence gathering"
+
+[[data.entries]]
+name = "theHarvester"
+description = "Email, subdomain, and name harvester from public sources"
+script = "theharvester.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "Recon-ng"
+description = "Full-featured web reconnaissance framework"
+script = "recon-ng.sh"
+task_list = "I R"

@@ -1,0 +1,55 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        target:
+          - x86_64-unknown-linux-gnu
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          target: ${{ matrix.target }}
+
+      - name: Build
+        run: cargo build --release --target ${{ matrix.target }}
+
+      - name: Rename binary and create checksum
+        run: |
+          if [ "${{ matrix.target }}" = "x86_64-unknown-linux-gnu" ]; then
+            mv target/${{ matrix.target }}/release/zzyutil zzyutil
+          else
+            mv target/${{ matrix.target }}/release/zzyutil zzyutil-${{ matrix.target }}
+          fi
+          sha256sum zzyutil* > zzyutil.sha256
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: zzyutil-${{ matrix.target }}
+          path: |
+            zzyutil*
+            start.sh
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            zzyutil
+            start.sh
+            zzyutil.sha256
+          generate_release_notes: true

@@ -1,0 +1,69 @@
+name = "Enumeration"
+
+[[data]]
+name = "Web Enumeration"
+description = "Directory, file, and parameter fuzzing tools"
+
+[[data.entries]]
+name = "Gobuster"
+description = "Fast directory/file & DNS busting written in Go"
+script = "gobuster.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "FFUF"
+description = "Fast web fuzzer for directories, parameters, and vhosts"
+script = "ffuf.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "Dirsearch"
+description = "Web path scanner and directory brute-forcer"
+script = "dirsearch.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "WFuzz"
+description = "Web application brute-forcer for parameters and content discovery"
+script = "wfuzz.sh"
+task_list = "I R"
+
+[[data]]
+name = "Service Enumeration"
+description = "Network service enumeration tools"
+
+[[data.entries]]
+name = "enum4linux"
+description = "Windows/Samba enumeration tool for users, shares, and policies"
+script = "enum4linux.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "SMBClient"
+description = "Interactive SMB/CIFS client for accessing Windows shares"
+script = "smbclient.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "SNMPWalk"
+description = "SNMP MIB enumeration tool for discovering system information"
+script = "snmpwalk.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "Nikto"
+description = "Web server vulnerability scanner (CGI, headers, outdated software)"
+script = "nikto.sh"
+task_list = "I R"
+
+[[data]]
+name = "Service Scanning"
+description = "General service enumeration"
+
+[[data.entries]]
+name = "Netcat"
+description = "Swiss-army knife for TCP/UDP connections and port scanning"
+script = "netcat.sh"
+task_list = "I R"

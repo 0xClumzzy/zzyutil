@@ -1,0 +1,60 @@
+name = "Wireless"
+
+[[data]]
+name = "Audit Suites"
+description = "Full wireless audit frameworks"
+
+[[data.entries]]
+name = "Aircrack-ng Suite"
+description = "Complete WEP/WPA2 cracking suite (airmon, airodump, aireplay, aircrack)"
+script = "aircrack.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "Wifite"
+description = "Automated wireless attack tool for WEP/WPA/WPS"
+script = "wifite.sh"
+task_list = "I R"
+
+[[data]]
+name = "WPA Attacks"
+description = "WPA/WPA2 key recovery and PMKID attacks"
+
+[[data.entries]]
+name = "hcxdumptool"
+description = "Capture PMKID and handshake packets for hashcat cracking"
+script = "hcxdump.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "hcxpcaptool"
+description = "Convert captured packets to hashcat format (PMKID/EAPOL)"
+script = "hcxpcaptool.sh"
+task_list = "I R"
+
+[[data]]
+name = "WPS Attacks"
+description = "WPS PIN brute-force tools"
+
+[[data.entries]]
+name = "Reaver"
+description = "WPS PIN brute-force attack tool"
+script = "reaver.sh"
+task_list = "I R"
+
+[[data]]
+name = "Monitoring"
+description = "Wireless monitoring and discovery"
+
+[[data.entries]]
+name = "Kismet"
+description = "Wireless network detector, sniffer, and intrusion detection"
+script = "kismet.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "Horst"
+description = "Lightweight IEEE 802.11 wireless analyzer"
+script = "horst.sh"
+task_list = "I R"

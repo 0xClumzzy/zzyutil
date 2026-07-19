@@ -1,0 +1,83 @@
+name = "Web Application"
+
+[[data]]
+name = "Reconnaissance"
+description = "Web app information gathering and fingerprinting"
+
+[[data.entries]]
+name = "WhatWeb"
+description = "Web application fingerprinting and version detection"
+script = "whatweb.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "WPScan"
+description = "WordPress vulnerability scanner (needs API key for some checks)"
+script = "wpscan.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "Nikto"
+description = "Web server scanner for outdated software and dangerous files"
+script = "nikto_web.sh"
+task_list = "I R"
+
+[[data]]
+name = "Reconnaissance"
+description = "Advanced web reconnaissance and enumeration"
+
+[[data.entries]]
+name = "httpx"
+description = "Fast web server detection, Extraction of technical details from HTTP response"
+script = "httpx.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "Nuclei"
+description = "Fast and customizable vulnerability scanner"
+script = "nuclei.sh"
+task_list = "I R"
+
+[[data]]
+name = "Application Testing"
+description = "Web application attack and testing tools"
+
+[[data.entries]]
+name = "SQLMap"
+description = "Automated SQL injection detection and exploitation"
+script = "sqlmap.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "XSStrike"
+description = "Cross-site scripting detection suite"
+script = "xsstrike.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "SSLyze"
+description = "SSL/TLS configuration scanner (ciphers, protocols, certs)"
+script = "sslyze.sh"
+task_list = "I R"
+
+[[data]]
+name = "Utilities"
+description = "General web utilities"
+
+[[data.entries]]
+name = "cURL"
+description = "Command-line HTTP client with header inspection"
+script = "curl_web.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "Wget"
+description = "File downloader with recursive mirroring support"
+script = "wget_web.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "DIRB"
+description = "Web content scanner for hidden directories and files"
+script = "dirb.sh"
+task_list = "I R"

@@ -1,0 +1,17 @@
+#!/bin/sh
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+. "$SCRIPT_DIR/../common-script.sh"
+
+echo ""
+info "=== WinPEAS (Privilege Escalation) ==="
+info "Windows privilege escalation checker."
+info ""
+info "Download links:"
+info "  winpeas.exe: https://github.com/peass-ng/PEASS-ng/releases/latest/download/winpeas.exe"
+info "  winPEAS.bat: https://github.com/peass-ng/PEASS-ng/releases/latest/download/winPEAS.bat"
+echo ""
+info "Usage on target (cmd):"
+echo "  > winpeas.exe"
+echo "  > winpeas.exe cmd searchfast"
+echo "  > winpeas.exe systeminfo"
+echo ""

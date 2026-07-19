@@ -1,0 +1,55 @@
+name = "Privilege Escalation"
+
+[[data]]
+name = "Linux Enumeration"
+description = "Linux-specific privilege escalation scripts and tools"
+
+[[data.entries]]
+name = "LinPEAS"
+description = "Linux Privilege Escalation Awesome Script (downloads latest)"
+script = "linpeas_priv.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "LSE (Linux Smart Enum)"
+description = "Linux security enumeration script for hardening assessment"
+script = "lse.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "Unix Privesc Check"
+description = "Unix privilege escalation checker script"
+script = "unix-privesc.sh"
+task_list = "I R"
+
+[[data]]
+name = "Windows Enumeration"
+description = "Windows-specific escalation tools"
+
+[[data.entries]]
+name = "WinPEAS"
+description = "Windows Privilege Escalation Awesome Script"
+script = "winpeas_priv.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "PowerUp"
+description = "PowerShell tool for Windows privilege escalation"
+script = "powerup.sh"
+task_list = "I R"
+
+[[data]]
+name = "Reference"
+description = "Escalation technique references and helpers"
+
+[[data.entries]]
+name = "GTFOBins Search"
+description = "Search GTFOBins for SUID binary exploitation techniques"
+script = "gtfobins.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "LOLBAS Search"
+description = "Search LOLBAS for Windows binary exploitation techniques"
+script = "lolbas.sh"
+task_list = "I R"

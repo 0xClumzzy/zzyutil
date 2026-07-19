@@ -1,0 +1,71 @@
+name = "Forensics & Stego"
+
+[[data]]
+name = "File Analysis"
+description = "Binary file analysis and carving tools"
+
+[[data.entries]]
+name = "Binwalk"
+description = "Firmware analysis tool for extracting embedded files"
+script = "binwalk.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "Foremost"
+description = "File carver that recovers files based on headers and footers"
+script = "foremost.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "Strings"
+description = "Extract printable strings from binary files"
+script = "strings.sh"
+task_list = "I R"
+
+[[data]]
+name = "Steganography"
+description = "Hidden data extraction from media files"
+
+[[data.entries]]
+name = "ExifTool"
+description = "Read, write, and edit file metadata (EXIF, IPTC, XMP)"
+script = "exiftool.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "Steghide"
+description = "Hide/extract data in JPEG and BMP images"
+script = "steghide.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "Stegseek"
+description = "Lightning-fast steghide password cracker"
+script = "stegseek.sh"
+task_list = "I R"
+
+[[data]]
+name = "Memory Analysis"
+description = "RAM dump analysis tools"
+
+[[data.entries]]
+name = "Volatility"
+description = "Memory forensics framework for analyzing RAM dumps"
+script = "volatility.sh"
+task_list = "I R"
+
+[[data]]
+name = "Disk Forensics"
+description = "Disk image and filesystem analysis"
+
+[[data.entries]]
+name = "Sleuth Kit (fls/icat/mmls)"
+description = "Filesystem forensic tools for disk image analysis"
+script = "sleuthkit.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "TestDisk"
+description = "Partition recovery and data undelete tool"
+script = "testdisk.sh"
+task_list = "I R"

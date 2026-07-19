@@ -1,0 +1,68 @@
+name = "Network"
+
+[[data]]
+name = "Traffic Analysis"
+description = "Packet capture and network traffic analysis"
+
+[[data.entries]]
+name = "tcpdump"
+description = "Command-line packet analyzer for real-time capture"
+script = "tcpdump.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "TShark"
+description = "Terminal-based Wireshark for deep packet inspection"
+script = "tshark.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "Wireshark"
+description = "GUI packet analyzer for network protocol inspection"
+script = "wireshark.sh"
+task_list = "I R"
+
+[[data]]
+name = "Tunneling & Proxies"
+description = "Traffic redirection and tunneling tools"
+
+[[data.entries]]
+name = "Netcat (nc)"
+description = "TCP/UDP Swiss army knife for port listening, connecting, and transferring"
+script = "netcat_net.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "Socat"
+description = "Multipurpose relay for bidirectional data transfer"
+script = "socat.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "Proxychains"
+description = "Force TCP connections through SOCKS/HTTP proxies"
+script = "proxychains.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "Chisel"
+description = "Fast TCP/UDP tunnel over HTTP (client + server)"
+script = "chisel_net.sh"
+task_list = "I R"
+
+[[data]]
+name = "Man-in-the-Middle"
+description = "Traffic interception and modification"
+
+[[data.entries]]
+name = "MITMProxy"
+description = "Interactive HTTPS proxy for traffic inspection and modification"
+script = "mitmproxy.sh"
+task_list = "I R"
+
+[[data.entries]]
+name = "Responder"
+description = "LLMNR/NBT-NS/mDNS poisoner for credential capture"
+script = "responder.sh"
+task_list = "I R"

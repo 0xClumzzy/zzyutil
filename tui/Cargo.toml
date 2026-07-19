@@ -1,0 +1,18 @@
+[package]
+name = "zzyutil"
+version = "0.1.0"
+description = "A cybersecurity toolbox TUI with embedded Black Arch-style tools"
+authors = ["clumzzy"]
+license = "MIT"
+repository = "https://github.com/clumzzy/zzyutil"
+homepage = "https://github.com/clumzzy/zzyutil"
+edition = "2021"
+
+[dependencies]
+zzyutil_core = { path = "../core" }
+ratatui = "0.29"
+crossterm = "0.28"
+clap = { version = "4", features = ["derive"] }
+anyhow = "1"
+which = "7"
+ego-tree = "0.6"

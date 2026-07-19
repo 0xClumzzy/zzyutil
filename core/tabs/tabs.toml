@@ -1,0 +1,13 @@
+directories = [
+    "recon",
+    "enum",
+    "exploit",
+    "password",
+    "web",
+    "network",
+    "post-exploit",
+    "forensics",
+    "wireless",
+    "rev",
+    "privesc",
+]

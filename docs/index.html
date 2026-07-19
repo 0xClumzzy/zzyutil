@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZZYUTIL - Cybersecurity Toolbox TUI for Linux</title>
+    <meta name="description" content="ZZYUTIL is a terminal-based cybersecurity toolbox for Linux. Pen testing, reconnaissance, exploitation, and more — all in one TUI app.">
+    <meta name="keywords" content="cybersecurity, pentesting, hacking tools, linux, tui, terminal, rust, security toolkit, penetration testing, recon, exploitation">
+    <meta property="og:title" content="ZZYUTIL - Cybersecurity Toolbox TUI">
+    <meta property="og:description" content="All-in-one terminal cybersecurity toolkit for Linux. 50+ tools organized by category.">
+    <meta property="og:type" content="website">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        .logo {
+            font-size: 3rem;
+            color: #ff3333;
+            margin-bottom: 10px;
+        }
+        .version {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+        h1 { color: #ff5555; font-size: 1.8rem; margin-bottom: 15px; }
+        p { color: #aaa; line-height: 1.8; margin-bottom: 15px; font-size: 1rem; }
+        .install {
+            background: #111;
+            border: 1px solid #333;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+        .install h2 { color: #ff5555; font-size: 1.2rem; margin-bottom: 10px; }
+        code {
+            background: #1a1a1a;
+            color: #50fa7b;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.95rem;
+        }
+        pre {
+            background: #1a1a1a;
+            color: #50fa7b;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .features { margin: 30px 0; }
+        .features h2 { color: #ff5555; font-size: 1.2rem; margin-bottom: 15px; }
+        ul { list-style: none; }
+        li {
+            padding: 8px 0;
+            border-bottom: 1px solid #1a1a1a;
+            color: #aaa;
+        }
+        li::before { content: "> "; color: #ff5555; }
+        .links { margin-top: 30px; }
+        .links a {
+            color: #ff5555;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        .links a:hover { text-decoration: underline; }
+        hr { border: none; border-top: 1px solid #222; margin: 30px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">0x██ ZZYUTIL</div>
+        <div class="version">v2.1.0</div>
+
+        <h1>Cybersecurity Toolbox for Linux</h1>
+        <p>ZZYUTIL is a terminal-based (TUI) cybersecurity toolkit written in Rust. It bundles 50+ security tools organized into categories like reconnaissance, enumeration, exploitation, web testing, and post-exploitation — all accessible from a single interface.</p>
+
+        <div class="install">
+            <h2>Install</h2>
+            <pre>git clone https://github.com/0xClumzzy/zzyutil.git
+cd zzyutil
+cargo build --release
+./target/release/zzyutil</pre>
+        </div>
+
+        <div class="features">
+            <h2>Features</h2>
+            <ul>
+                <li>50+ pentesting tools organized by category</li>
+                <li>Beautiful TUI with 3 themes (dark, compatible, cyber)</li>
+                <li>Auto-install missing tools via pacman, apt, paru, yay</li>
+                <li>Interactive tool execution with live output</li>
+                <li>Search and filter tools by name</li>
+                <li>Show only installed tools</li>
+                <li>Multi-select and batch execution</li>
+                <li>Built with Rust — fast and lightweight</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="features">
+            <h2>Tool Categories</h2>
+            <ul>
+                <li>Reconnaissance — nmap, amass, subfinder, masscan, rustscan</li>
+                <li>Enumeration — gobuster, ffuf, enum4linux, nikto, smbclient</li>
+                <li>Exploitation — metasploit, sqlmap, commix, searchsploit</li>
+                <li>Web — httpx, nuclei, dirb, wpscan, sslyze</li>
+                <li>Password Attacks — john, hashcat, hydra, medusa</li>
+                <li>Post-Exploitation — ligolo-ng, lazagne, pspy, chisel</li>
+                <li>Forensics — binwalk, exiftool, steghide, sleuthkit</li>
+                <li>Wireless — aircrack-ng, wifite, reaver, kismet</li>
+                <li>Reverse Engineering — radare2, gdb, strace, ltrace</li>
+                <li>Privilege Escalation — pspy, linux-exploit-suggester</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="links">
+            <a href="https://github.com/0xClumzzy/zzyutil">GitHub</a>
+            <a href="https://github.com/0xClumzzy/zzyutil/releases">Releases</a>
+        </div>
+
+        <hr>
+
+        <p style="color: #444; font-size: 0.8rem;">Made by 0xClumzZy</p>
+    </div>
+</body>
+</html>
