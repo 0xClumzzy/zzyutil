@@ -1,10 +1,7 @@
 # ZZYUTIL — Cybersecurity Toolbox
 
 A terminal UI that organizes and runs cybersecurity tools from a browsable catalog. Inspired by Black Arch, built on Ratatui.
-
-![Uploading image.png…]()
-
-
+<img width="1818" height="889" alt="image" src="https://github.com/user-attachments/assets/aedfd3b1-3049-402b-ba96-ab926afea553" />
 ## Features
 
 - **50+ pentesting tools** organized by category
