@@ -2,7 +2,8 @@
 
 A terminal UI that organizes and runs cybersecurity tools from a browsable catalog. Inspired by Black Arch, built on Ratatui.
 
-<img width="1793" height="891" alt="image" src="https://github.com/user-attachments/assets/e8b96c1c-b184-43e2-8272-ea73f660f24a" />
+![Uploading image.png…]()
+
 
 ## Features
 
