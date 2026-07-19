@@ -1,0 +1,58 @@
+name = "Remote Tooling"
+
+[[data]]
+name = "Remote Access"
+description = "Remote connection and administration tools"
+
+[[data.entries]]
+name = "evil-winrm"
+description = "WinRM shell for Windows remote management and penetration testing"
+script = "evil-winrm.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "xfreerdp"
+description = "RDP client for remote desktop connections"
+script = "xfreerdp.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "Remmina"
+description = "Remote desktop client supporting RDP, VNC, SSH, and more"
+script = "remmina.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "SSH"
+description = "Secure Shell client for remote terminal access"
+script = "ssh.sh"
+task_list = "I R"
+multi_select = true
+
+[[data]]
+name = "Tunneling & Pivoting"
+description = "Network tunneling and port forwarding"
+
+[[data.entries]]
+name = "Chisel"
+description = "Fast TCP/UDP tunnel over HTTP with SOCKS5 proxy"
+script = "chisel.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "Ligolo-ng"
+description = "Tunneling tool for pentesters using tun interfaces"
+script = "ligolo-ng.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "Proxychains"
+description = "Redirect TCP connections through proxy servers"
+script = "proxychains.sh"
+task_list = "I R"
+multi_select = true

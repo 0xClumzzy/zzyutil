@@ -10,4 +10,9 @@ directories = [
     "wireless",
     "rev",
     "privesc",
+    "cloud",
+    "containers",
+    "osint",
+    "audit",
+    "remote",
 ]

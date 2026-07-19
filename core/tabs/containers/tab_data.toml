@@ -1,0 +1,58 @@
+name = "Container Security"
+
+[[data]]
+name = "Image Scanning"
+description = "Container image vulnerability scanning"
+
+[[data.entries]]
+name = "Trivy"
+description = "Comprehensive vulnerability scanner for containers and dependencies"
+script = "trivy.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "Grype"
+description = "Vulnerability scanner for container images and filesystems"
+script = "grype.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "Dockle"
+description = "Container image linter for best practices"
+script = "dockle.sh"
+task_list = "I R"
+multi_select = true
+
+[[data]]
+name = "Runtime Security"
+description = "Container runtime and orchestration security"
+
+[[data.entries]]
+name = "kube-hunter"
+description = "Kubernetes cluster penetration testing tool"
+script = "kube-hunter.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "kube-bench"
+description = "Kubernetes CIS benchmark checker"
+script = "kube-bench.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "Docker Bench"
+description = "Docker CIS benchmark security checks"
+script = "docker-bench.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "Falco"
+description = "Cloud-native runtime security with syscalls"
+script = "falco.sh"
+task_list = "I R"
+multi_select = true

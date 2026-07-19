@@ -2,7 +2,7 @@ use std::rc::Rc;
 
 use ratatui::{
     layout::{Constraint, Direction, Layout, Rect},
-    style::{Color, Style, Stylize},
+    style::{Color, Style},
     text::{Line, Span, Text},
     widgets::{Block, Borders, List, ListItem, ListState, Paragraph, Widget},
     Frame,
@@ -20,6 +20,7 @@ use crate::{
     float::Float,
     hint::{create_shortcut_list, render_shortcuts},
     theme::Theme,
+    wallpaper::{Wallpaper, WallpaperPattern},
 };
 
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -334,6 +335,10 @@ impl AppState {
 
     pub fn draw(&mut self, frame: &mut Frame) {
         let area = frame.area();
+        
+        let wallpaper = Wallpaper::new(WallpaperPattern::Dots, Color::Rgb(30, 30, 40));
+        wallpaper.render(area, frame.buffer_mut());
+
         let layout = Layout::default()
             .direction(Direction::Vertical)
             .constraints([Constraint::Min(1), Constraint::Length(3)])

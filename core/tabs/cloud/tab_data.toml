@@ -1,0 +1,58 @@
+name = "Cloud Security"
+
+[[data]]
+name = "AWS Security"
+description = "Amazon Web Services security auditing tools"
+
+[[data.entries]]
+name = "Prowler"
+description = "AWS security assessment, auditing and hardening tool"
+script = "prowler.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "ScoutSuite"
+description = "Multi-cloud security auditing tool for AWS, Azure, GCP"
+script = "scoutsuite.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "Pacu"
+description = "AWS exploitation framework for penetration testing"
+script = "pacu.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "CloudSploit"
+description = "Cloud security configuration monitoring"
+script = "cloudsploit.sh"
+task_list = "I R"
+multi_select = true
+
+[[data]]
+name = "Azure Security"
+description = "Microsoft Azure security auditing tools"
+
+[[data.entries]]
+name = "ROADtools"
+description = "Azure AD exploration toolkit"
+script = "roadtools.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "Stormspotter"
+description = "Azure attack graph visualization"
+script = "stormspotter.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "MicroBurst"
+description = "Azure security assessment toolkit"
+script = "microburst.sh"
+task_list = "I R"
+multi_select = true

@@ -5,6 +5,7 @@ mod filter;
 mod float;
 mod hint;
 mod banner;
+mod wallpaper;
 
 use std::io;
 use std::thread;
@@ -36,7 +37,7 @@ fn main() {
     let theme = Theme::from_name(&args.theme);
     let validate = !args.override_validation;
 
-    let catalog = zzyutil_core::inner::get_catalog(validate);
+    let catalog = zzyutil_core::inner::get_catalog_with_plugins(validate);
 
     let mut app = AppState::new(catalog, theme);
     app.focus = Focus::List;

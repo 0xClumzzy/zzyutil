@@ -1,5 +1,5 @@
 use ratatui::text::Span;
-use ratatui::style::{Color, Style, Stylize};
+use ratatui::style::{Color, Style};
 
 use crate::theme::Theme;
 

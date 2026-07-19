@@ -1,5 +1,6 @@
 pub mod inner;
 pub mod config;
+pub mod plugins;
 
 use std::rc::Rc;
 use ego_tree::Tree;

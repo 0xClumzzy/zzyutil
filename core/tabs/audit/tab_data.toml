@@ -1,0 +1,58 @@
+name = "Auditing"
+
+[[data]]
+name = "System Auditing"
+description = "System security audit and compliance"
+
+[[data.entries]]
+name = "Lynis"
+description = "Security auditing tool for systems running Linux, macOS, and Unix"
+script = "lynis.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "LinPEAS"
+description = "Linux privilege escalation auditing script"
+script = "linpeas.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "LSE"
+description = "Linux Smart Enumeration for privilege escalation"
+script = "lse.sh"
+task_list = "I R"
+multi_select = true
+
+[[data]]
+name = "Service Auditing"
+description = "Network service security auditing"
+
+[[data.entries]]
+name = "ssh-audit"
+description = "SSH server and client security auditor"
+script = "ssh-audit.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "rdp-sec-check"
+description = "RDP security configuration checker"
+script = "rdp-sec-check.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "SSLyze"
+description = "TLS/SSL configuration analyzer"
+script = "sslyze.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "Nikto"
+description = "Web server scanner for known vulnerabilities"
+script = "nikto.sh"
+task_list = "I R"
+multi_select = true

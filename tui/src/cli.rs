@@ -6,7 +6,7 @@ pub struct Args {
     #[arg(long)]
     pub config: Option<String>,
 
-    #[arg(long, default_value = "dark", help = "Theme: dark, compatible, cyber")]
+    #[arg(long, default_value = "compatible", help = "Theme: dark, compatible, cyber, ocean, dracula, nord, monokai, solarized")]
     pub theme: String,
 
     #[arg(long)]

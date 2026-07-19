@@ -1,0 +1,69 @@
+name = "OSINT"
+
+[[data]]
+name = "Username Research"
+description = "Username enumeration across platforms"
+
+[[data.entries]]
+name = "Sherlock"
+description = "Hunt usernames across 300+ social networks"
+script = "sherlock.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "Namechk"
+description = "Username and brand name availability checker"
+script = "namechk.sh"
+task_list = "I R"
+multi_select = true
+
+[[data]]
+name = "Intelligence Gathering"
+description = "OSINT framework and data collection"
+
+[[data.entries]]
+name = "SpiderFoot"
+description = "OSINT automation tool for reconnaissance"
+script = "spiderfoot.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "Maltego"
+description = "Interactive data mining and link analysis"
+script = "maltego.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "theHarvester"
+description = "Email, subdomain, and name harvester from public sources"
+script = "theharvester.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "Recon-ng"
+description = "Full-featured web reconnaissance framework"
+script = "recon-ng.sh"
+task_list = "I R"
+multi_select = true
+
+[[data]]
+name = "Domain & IP"
+description = "Domain and IP address investigation"
+
+[[data.entries]]
+name = "WhoisXML"
+description = "Domain and IP WHOIS lookup"
+script = "whoisxml.sh"
+task_list = "I R"
+multi_select = true
+
+[[data.entries]]
+name = "Shodan"
+description = "Internet-connected device search engine CLI"
+script = "shodan.sh"
+task_list = "I R"
+multi_select = true

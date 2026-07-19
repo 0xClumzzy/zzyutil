@@ -8,6 +8,7 @@ use serde::Deserialize;
 use temp_dir::TempDir;
 
 use crate::{Catalog, Command, ListNode, Tab};
+use crate::plugins::PluginTab;
 
 static TABS_DIR: Dir = include_dir!("$CARGO_MANIFEST_DIR/tabs");
 
@@ -176,6 +177,30 @@ pub fn get_catalog(validate: bool) -> Catalog {
     }
 }
 
+pub fn get_catalog_with_plugins(validate: bool) -> Catalog {
+    match try_get_catalog_with_plugins(validate) {
+        Ok(catalog) => catalog,
+        Err(e) => {
+            eprintln!("Warning: Failed to load catalog with plugins: {}", e);
+            eprintln!("Falling back to base catalog.");
+            get_catalog(validate)
+        }
+    }
+}
+
+fn try_get_catalog_with_plugins(validate: bool) -> Result<Catalog, String> {
+    let mut catalog = try_get_catalog(validate)?;
+    
+    let plugins_config = crate::plugins::PluginsConfig::load();
+    let plugins = plugins_config.load_all_plugins();
+    
+    if !plugins.is_empty() {
+        crate::plugins::merge_plugin_tabs(&mut catalog.tabs, &plugins);
+    }
+    
+    Ok(catalog)
+}
+
 fn try_get_catalog(validate: bool) -> Result<Catalog, String> {
     let temp_dir = Rc::new(
         TempDir::new().map_err(|e| format!("Failed to create temp directory: {}", e))?,
@@ -258,4 +283,50 @@ fn extract_dir(dir: &Dir, dest: &Path) -> Result<(), String> {
     }
 
     Ok(())
+}
+
+pub fn build_plugin_tree(plugin_tab: &PluginTab) -> Tree<Rc<ListNode>> {
+    let root = Rc::new(ListNode {
+        name: "root".to_string(),
+        description: String::new(),
+        command: Command::None,
+        task_list: String::new(),
+        multi_select: false,
+    });
+    let mut tree = Tree::new(root);
+    let root_id = tree.root().id();
+
+    for category in &plugin_tab.categories {
+        let category_node = Rc::new(ListNode {
+            name: category.name.clone(),
+            description: category.description.clone().unwrap_or_default(),
+            command: Command::None,
+            task_list: String::new(),
+            multi_select: false,
+        });
+
+        let category_id = tree.get_mut(root_id).unwrap().append(category_node).id();
+
+        for tool in &category.tools {
+            let command = if let Some(cmd) = &tool.command {
+                Command::Raw(cmd.clone())
+            } else if let Some(_script) = &tool.script {
+                Command::None
+            } else {
+                Command::None
+            };
+
+            let tool_node = Rc::new(ListNode {
+                name: tool.name.clone(),
+                description: tool.description.clone().unwrap_or_default(),
+                command,
+                task_list: tool.task_list.clone().unwrap_or_default(),
+                multi_select: tool.multi_select.unwrap_or(false),
+            });
+
+            tree.get_mut(category_id).unwrap().append(tool_node);
+        }
+    }
+
+    tree
 }
