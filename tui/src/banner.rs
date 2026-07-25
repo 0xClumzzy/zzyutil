@@ -32,7 +32,7 @@ impl Banner {
                 Span::styled("██", Style::default().fg(fg).bold()),
                 Span::styled("╗", Style::default().fg(dim)),
                 Span::styled("  ZZYUTIL  ", Style::default().fg(accent).bold()),
-                Span::styled("v2.1.0", Style::default().fg(dim)),
+                Span::styled("v2.3.0", Style::default().fg(dim)),
                 Span::styled("                ║", Style::default().fg(dim)),
             ]),
             Line::from(vec![
