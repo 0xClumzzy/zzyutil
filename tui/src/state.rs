@@ -139,33 +139,123 @@ impl AppState {
         let query = self.filter.query.to_lowercase();
         let tree_root = tree.root().id();
 
+        let query_words: Vec<&str> = query.split_whitespace().collect();
+
+        fn matches_query(name: &str, desc: &str, query_words: &[&str]) -> bool {
+            query_words.iter().all(|word| {
+                name.contains(word) || desc.contains(word)
+            })
+        }
+
+        fn fuzzy_score(text: &str, word: &str) -> Option<u16> {
+            let text_chars: Vec<char> = text.chars().collect();
+            let word_chars: Vec<char> = word.chars().collect();
+
+            if word_chars.is_empty() {
+                return Some(0);
+            }
+
+            let mut ti = 0;
+            let mut score = 0u16;
+            let mut prev_idx: Option<usize> = None;
+
+            for (wi, &wc) in word_chars.iter().enumerate() {
+                let mut found = false;
+                while ti < text_chars.len() {
+                    if text_chars[ti] == wc {
+                        if let Some(prev) = prev_idx {
+                            if ti == prev + 1 {
+                                score += 3;
+                            } else if ti == 0 && wi == 0 {
+                                score += 5;
+                            } else {
+                                score += 1;
+                            }
+                        } else if ti == 0 && wi == 0 {
+                            score += 5;
+                        } else {
+                            score += 1;
+                        }
+                        prev_idx = Some(ti);
+                        ti += 1;
+                        found = true;
+                        break;
+                    }
+                    ti += 1;
+                }
+                if !found {
+                    return None;
+                }
+            }
+            Some(score)
+        }
+
+        fn best_score(
+            name: &str,
+            desc: &str,
+            query_words: &[&str],
+        ) -> Option<u16> {
+            let mut total = 0u16;
+            for word in query_words {
+                let name_score = fuzzy_score(name, word);
+                let desc_score = fuzzy_score(desc, word);
+                match (name_score, desc_score) {
+                    (Some(ns), Some(ds)) => total += ns.max(ds),
+                    (Some(ns), None) => total += ns,
+                    (None, Some(ds)) => total += ds,
+                    (None, None) => return None,
+                }
+            }
+            Some(total)
+        }
+
         fn collect_matches(
             tree: &ego_tree::Tree<Rc<ListNode>>,
             id: ego_tree::NodeId,
-            query: &str,
-            results: &mut Vec<FlatEntry>,
+            query_words: &[&str],
+            results: &mut Vec<(u16, FlatEntry)>,
             depth: usize,
         ) {
             if let Some(node) = tree.get(id) {
                 let name = node.value().name.to_lowercase();
                 let desc = node.value().description.to_lowercase();
-                if name.contains(query) || desc.contains(query) {
-                    results.push(FlatEntry {
+                let node_command = match &node.value().command {
+                    zzyutil_core::Command::Raw(s) => s.to_lowercase(),
+                    zzyutil_core::Command::LocalFile { executable, args, .. } => {
+                        let mut parts = vec![executable.to_lowercase()];
+                        for a in args {
+                            parts.push(a.to_lowercase());
+                        }
+                        parts.join(" ")
+                    }
+                    zzyutil_core::Command::None => String::new(),
+                };
+
+                let mut score = None;
+                if matches_query(&name, &desc, query_words) {
+                    score = best_score(&name, &desc, query_words);
+                } else if matches_query(&node_command, &desc, query_words) {
+                    score = best_score(&node_command, &desc, query_words);
+                }
+
+                if let Some(s) = score {
+                    results.push((s, FlatEntry {
                         node_id: node.id(),
                         node: node.value().clone(),
                         depth,
                         has_children: node.has_children(),
-                    });
+                    }));
                 }
                 for child in node.children() {
-                    collect_matches(tree, child.id(), query, results, depth + 1);
+                    collect_matches(tree, child.id(), query_words, results, depth + 1);
                 }
             }
         }
 
-        let mut results = vec![];
-        collect_matches(tree, tree_root, &query, &mut results, 0);
-        results
+        let mut scored_results = vec![];
+        collect_matches(tree, tree_root, &query_words, &mut scored_results, 0);
+        scored_results.sort_by(|a, b| b.0.cmp(&a.0));
+        scored_results.into_iter().map(|(_, entry)| entry).collect()
     }
 
     pub fn navigate_up(&mut self) {

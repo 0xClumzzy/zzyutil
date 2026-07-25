@@ -39,6 +39,13 @@ description = "Extract printable strings from binary files"
 script = "strings_rev.sh"
 task_list = "I R"
 
+[[data.entries]]
+name = "Ghidra"
+description = "NSA software reverse engineering framework with decompiler and scripting"
+script = "ghidra.sh"
+task_list = "I R"
+multi_select = true
+
 [[data]]
 name = "Dynamic Analysis"
 description = "Runtime tracing and monitoring"

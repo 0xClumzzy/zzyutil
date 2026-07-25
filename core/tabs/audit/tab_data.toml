@@ -56,3 +56,14 @@ description = "Web server scanner for known vulnerabilities"
 script = "nikto.sh"
 task_list = "I R"
 multi_select = true
+
+[[data]]
+name = "Vulnerability Scanning"
+description = "Network vulnerability assessment scanners"
+
+[[data.entries]]
+name = "OpenVAS"
+description = "Open Vulnerability Assessment Scanner - comprehensive network vulnerability scanner"
+script = "openvas.sh"
+task_list = "I R"
+multi_select = true
