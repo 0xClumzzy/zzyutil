@@ -1,4 +1,4 @@
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use std::rc::Rc;
 use std::fs;
 
@@ -8,7 +8,7 @@ use serde::Deserialize;
 use temp_dir::TempDir;
 
 use crate::{Catalog, Command, ListNode, Tab};
-use crate::plugins::PluginTab;
+use crate::plugins::{PluginTab, PluginTool};
 
 static TABS_DIR: Dir = include_dir!("$CARGO_MANIFEST_DIR/tabs");
 
@@ -42,11 +42,11 @@ struct Precondition {
     values: Vec<String>,
 }
 
-fn evaluate_precondition(pc: &Precondition) -> bool {
-    match pc.data.as_str() {
-        "command_exists" => pc.values.iter().any(|v| which::which(v).is_ok()),
-        "file_exists" => pc.values.iter().any(|v| Path::new(v).exists()),
-        "environment" => pc.values.iter().any(|v| {
+fn evaluate_precondition_from_parts(data: &str, values: &[String]) -> bool {
+    match data {
+        "command_exists" => values.iter().any(|v| which::which(v).is_ok()),
+        "file_exists" => values.iter().any(|v| Path::new(v).exists()),
+        "environment" => values.iter().any(|v| {
             let parts: Vec<&str> = v.splitn(2, '=').collect();
             if parts.len() == 2 {
                 std::env::var(parts[0]).ok().as_deref() == Some(parts[1])
@@ -55,11 +55,11 @@ fn evaluate_precondition(pc: &Precondition) -> bool {
             }
         }),
         "containing_file" => {
-            if pc.values.len() < 2 {
+            if values.len() < 2 {
                 return false;
             }
-            let path = &pc.values[0];
-            let patterns = &pc.values[1..];
+            let path = &values[0];
+            let patterns = &values[1..];
             if let Ok(content) = fs::read_to_string(path) {
                 patterns.iter().all(|p| content.contains(p))
             } else {
@@ -68,6 +68,22 @@ fn evaluate_precondition(pc: &Precondition) -> bool {
         }
         _ => false,
     }
+}
+
+fn plugin_entry_passes_preconditions(entry: &crate::plugins::PluginTool) -> bool {
+    if let Some(preconditions) = &entry.preconditions {
+        for pc in preconditions {
+            let result = evaluate_precondition_from_parts(&pc.data, &pc.values);
+            if result != pc.matches {
+                return false;
+            }
+        }
+    }
+    true
+}
+
+fn evaluate_precondition(pc: &Precondition) -> bool {
+    evaluate_precondition_from_parts(&pc.data, &pc.values)
 }
 
 fn entry_passes_preconditions(entry: &DataEntry) -> bool {
@@ -308,13 +324,11 @@ pub fn build_plugin_tree(plugin_tab: &PluginTab) -> Tree<Rc<ListNode>> {
         let category_id = tree.get_mut(root_id).unwrap().append(category_node).id();
 
         for tool in &category.tools {
-            let command = if let Some(cmd) = &tool.command {
-                Command::Raw(cmd.clone())
-            } else if let Some(_script) = &tool.script {
-                Command::None
-            } else {
-                Command::None
-            };
+            if !plugin_entry_passes_preconditions(tool) {
+                continue;
+            }
+
+            let command = resolve_plugin_command(tool);
 
             let tool_node = Rc::new(ListNode {
                 name: tool.name.clone(),
@@ -329,4 +343,27 @@ pub fn build_plugin_tree(plugin_tab: &PluginTab) -> Tree<Rc<ListNode>> {
     }
 
     tree
+}
+
+fn resolve_plugin_command(tool: &PluginTool) -> Command {
+    if let Some(cmd) = &tool.command {
+        return Command::Raw(cmd.clone());
+    }
+
+    if let Some(script) = &tool.script {
+        let script_path = PathBuf::from(script);
+        let (exe, args) = get_shebang(&script_path);
+
+        if which::which(&exe).is_err() {
+            return Command::None;
+        }
+
+        return Command::LocalFile {
+            executable: exe,
+            args,
+            file: script_path.to_string_lossy().to_string(),
+        };
+    }
+
+    Command::None
 }

@@ -35,6 +35,14 @@ pub struct PluginTool {
     pub script: Option<String>,
     pub task_list: Option<String>,
     pub multi_select: Option<bool>,
+    pub preconditions: Option<Vec<PluginPrecondition>>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct PluginPrecondition {
+    pub matches: bool,
+    pub data: String,
+    pub values: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

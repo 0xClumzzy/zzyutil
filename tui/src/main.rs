@@ -30,6 +30,7 @@ use ratatui::{
 use crate::cli::Args;
 use crate::state::{AppState, Focus};
 use crate::theme::Theme;
+use zzyutil_core::config::Config;
 
 fn main() {
     let args = Args::parse();
@@ -37,15 +38,42 @@ fn main() {
     let theme = Theme::from_name(&args.theme);
     let validate = !args.override_validation;
 
+    let config = match args.config.as_deref() {
+        Some(path) => Config::from_file(path),
+        None => Config::from_file(&config_path()),
+    };
+
+    if !args.size_bypass {
+        check_terminal_size();
+    }
+
     let catalog = zzyutil_core::inner::get_catalog_with_plugins(validate);
 
-    let mut app = AppState::new(catalog, theme);
+    let mut app = AppState::new(catalog, theme, &config);
     app.focus = Focus::List;
 
     if let Err(e) = run_tui(&mut app, &args) {
         eprintln!("Error: {}", e);
         std::process::exit(1);
     }
+}
+
+fn check_terminal_size() {
+    if let Ok(size) = crossterm::terminal::size() {
+        if size.0 < 80 || size.1 < 24 {
+            eprintln!("Warning: Terminal size is {}x{}. Recommended: 80x24 or larger.", size.0, size.1);
+        }
+    }
+}
+
+fn config_path() -> String {
+    let home = std::env::var("HOME").unwrap_or_else(|_| ".".to_string());
+    std::path::PathBuf::from(home)
+        .join(".config")
+        .join("zzyutil")
+        .join("config.toml")
+        .to_string_lossy()
+        .to_string()
 }
 
 fn run_tui(app: &mut AppState, args: &Args) -> Result<()> {

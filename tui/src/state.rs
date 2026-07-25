@@ -9,6 +9,7 @@ use ratatui::{
 };
 
 use zzyutil_core::{Catalog, Command, ListNode};
+use zzyutil_core::config::Config;
 
 fn is_command_installed(cmd: &Command) -> bool {
     !matches!(cmd, Command::None)
@@ -55,10 +56,12 @@ pub struct AppState {
     pub running_output: Option<(String, Text<'static>)>,
     pub pending_script: Option<String>,
     pub show_installed_only: bool,
+    pub skip_confirmation: bool,
+    pub auto_execute: Vec<String>,
 }
 
 impl AppState {
-    pub fn new(catalog: Catalog, theme: Theme) -> Self {
+    pub fn new(catalog: Catalog, theme: Theme, config: &Config) -> Self {
         Self {
             catalog,
             current_tab: 0,
@@ -74,6 +77,8 @@ impl AppState {
             running_output: None::<(String, Text<'static>)>,
             pending_script: None,
             show_installed_only: false,
+            skip_confirmation: config.skip_confirmation.unwrap_or(false),
+            auto_execute: config.auto_execute_set().into_iter().collect(),
         }
     }
 
@@ -251,6 +256,10 @@ impl AppState {
             self.enter_directory();
             return;
         }
+        if self.skip_confirmation || self.auto_execute.contains(&entry.node.name) {
+            self.run_entry(entry);
+            return;
+        }
         if !self.multi_select_mode && self.selected.is_empty() {
             self.confirm_message = Some(format!("Install '{}'?", entry.node.name));
         } else if !self.selected.is_empty() {
@@ -260,6 +269,28 @@ impl AppState {
             self.confirm_message = Some(format!("Install '{}'?", entry.node.name));
         }
         self.focus = Focus::Confirm;
+    }
+
+    fn run_entry(&mut self, entry: &FlatEntry) {
+        let script = self.build_script_for_entry(entry);
+        if !script.is_empty() {
+            self.pending_script = Some(script);
+        }
+    }
+
+    fn build_script_for_entry(&self, entry: &FlatEntry) -> String {
+        match &entry.node.command {
+            Command::Raw(raw) => format!("{}\n", raw),
+            Command::LocalFile {
+                executable,
+                args,
+                file,
+            } => {
+                let args_str = args.join(" ");
+                format!("{} {} '{}'\n", executable, args_str, file)
+            }
+            Command::None => String::new(),
+        }
     }
 
     pub fn next_tab(&mut self) {

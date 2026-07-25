@@ -4,8 +4,11 @@ A terminal UI that organizes and runs cybersecurity tools from a browsable catal
 <img width="1818" height="889" alt="image" src="https://github.com/user-attachments/assets/aedfd3b1-3049-402b-ba96-ab926afea553" />
 ## Features
 
+- **Configurable** — load settings from `~/.config/zzyutil/config.toml`
+- **Plugin system** — extend with custom plugin tabs
+- **8 themes** — dark, compatible, cyber, ocean, dracula, nord, monokai, solarized
 - **50+ pentesting tools** organized by category
-- **Beautiful TUI** with 3 themes (dark, compatible, cyber)
+- **8 themes** — dark, compatible, cyber, ocean, dracula, nord, monokai, solarized
 - **Auto-install** missing tools via pacman, apt, paru, yay
 - **Interactive execution** with live output display
 - **Search & filter** tools by name
@@ -64,13 +67,29 @@ zzyutil --theme cyber --mouse
 zzyutil --override-validation
 ```
 
-### CLI Options
+### Configuration
+
+Create `~/.config/zzyutil/config.toml` to customize behavior:
+
+```toml
+auto_execute = ["nmap", "hydra"]
+skip_confirmation = false
+size_bypass = false
+```
+
+| Option | Description |
+|--------|-------------|
+| `auto_execute` | Tools that run immediately without confirmation |
+| `skip_confirmation` | Skip the install confirmation dialog |
+| `size_bypass` | Skip terminal size warning |
+
+## CLI Options
 
 | Option | Description | Default |
 |--------|-------------|---------|
-| `--theme` | Theme: `dark`, `compatible`, `cyber` | `dark` |
+| `--theme` | Theme: `dark`, `compatible`, `cyber`, `ocean`, `dracula`, `nord`, `monokai`, `solarized` | `dark` |
 | `--mouse` | Enable mouse support | `false` |
-| `--config` | Path to config file | — |
+| `--config` | Path to config file | `~/.config/zzyutil/config.toml` |
 | `--skip-confirmation` | Skip install confirmation | `false` |
 | `--override-validation` | Show all tools regardless of dependencies | `false` |
 | `--size-bypass` | Bypass terminal size check | `false` |

@@ -153,9 +153,40 @@ else
     echo_ok "[!] Checksum verification disabled by user (--no-verify)"
 fi
 
+install_binary() {
+    local src="$1"
+    local dest="$2"
+
+    spinner() {
+        local pid="$1"
+        local delay=0.1
+        local frames=('⠋' '⠙' '⠹' '⠸' '⠼' '⠴' '⠦' '⠧' '⠇' '⠏')
+        local i=0
+        while kill -0 "$pid" 2>/dev/null; do
+            printf '\r  %s Installing... ' "${frames[$i]}"
+            i=$(( (i + 1) % ${#frames[@]} ))
+            sleep "$delay"
+        done
+        printf '\r  ✓ Installation complete     \n'
+    }
+
+    if [ -w "$(dirname "$dest")" ]; then
+        install -m 0755 "$src" "$dest" &
+        local pid=$!
+        spinner "$pid"
+        wait "$pid"
+    else
+        check_cmd sudo
+        printf '  %s Installing to %s (requires sudo)...\n' "$green" "$dest"
+        sudo install -m 0755 "$src" "$dest" &
+        local pid=$!
+        spinner "$pid"
+        wait "$pid"
+    fi
+}
+
 if [ "$INSTALL" -eq 1 ]; then
     DEST="/usr/local/bin/zzyutil"
-    echo_ok "[*] Installing to $DEST"
 
     # Non-interactive safety: if --yes is provided and checksum verification was not performed, refuse
     if [ "$YES" -eq 1 ] && [ "$NO_VERIFY" -eq 0 ] && [ "$CHECKSUM_VERIFIED" -eq 0 ]; then
@@ -163,18 +194,7 @@ if [ "$INSTALL" -eq 1 ]; then
         exit 1
     fi
 
-    if [ -w "$(dirname "$DEST")" ]; then
-        install -m 0755 "$TMP_BIN" "$DEST"
-    else
-        # Use sudo to install
-        check_cmd sudo
-        if [ "$YES" -eq 1 ]; then
-            # Non-interactive sudo may fail if no tty or no cached credentials; still attempt
-            sudo install -m 0755 "$TMP_BIN" "$DEST"
-        else
-            sudo install -m 0755 "$TMP_BIN" "$DEST"
-        fi
-    fi
+    install_binary "$TMP_BIN" "$DEST"
     echo_ok "[+] Installed to $DEST"
     printf '%sYou can now run: %s zzyutil%s\n' "$green" "$rc" "$rc"
     exit 0

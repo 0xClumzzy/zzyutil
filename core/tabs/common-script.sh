@@ -157,6 +157,7 @@ ensure_tool() {
                 hcxdumptool) pkg="hcxdumptool" ;;
                 airmon-ng) pkg="aircrack-ng" ;;
                 reaver) pkg="reaver" ;;
+                searchsploit) pkg="exploitdb" ;;
             esac
         fi
         install_package "$pkg" || return 1
