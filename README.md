@@ -8,10 +8,9 @@ A terminal UI that organizes and runs cybersecurity tools from a browsable catal
 - **Plugin system** — extend with custom plugin tabs
 - **8 themes** — dark, compatible, cyber, ocean, dracula, nord, monokai, solarized
 - **50+ pentesting tools** organized by category
-- **8 themes** — dark, compatible, cyber, ocean, dracula, nord, monokai, solarized
 - **Auto-install** missing tools via pacman, apt, paru, yay
 - **Interactive execution** with live output display
-- **Search & filter** tools by name
+- **Search & filter** tools by name with fuzzy matching and relevance ranking
 - **Show only installed** tools
 - **Multi-select** and batch execution
 - **Precondition checks** for tool availability
@@ -128,7 +127,6 @@ sudo zzyutil --theme cyber
 | `dark` | Dark red/black theme (default) |
 | `compatible` | Simple high-contrast theme for terminals with limited color support |
 | `cyber` | Cyber green/hacker aesthetic |
-AND A FEW MORE
 ## Tool Categories
 
 ### Reconnaissance
@@ -136,6 +134,12 @@ Network discovery, port scanning, and OSINT gathering.
 - **Port Scanning**: Nmap, RustScan, Masscan
 - **DNS Discovery**: Subfinder, Amass, dnsrecon, dnsenum
 - **OSINT**: theHarvester, Recon-ng
+
+### Auditing
+System, service, and vulnerability auditing tools.
+- **System Auditing**: Lynis, LinPEAS, LSE
+- **Service Auditing**: ssh-audit, rdp-sec-check, SSLyze
+- **Vulnerability Scanning**: OpenVAS
 
 ### Enumeration
 Service and application enumeration.
@@ -170,6 +174,8 @@ Wireless network auditing and attacks.
 
 ### Reverse Engineering
 Binary analysis and reverse engineering tools.
+- **Debuggers**: GDB, radare2
+- **Binary Analysis**: objdump, readelf, strings, Ghidra
 
 ### Privilege Escalation
 Linux privilege escalation tools and techniques.
@@ -197,6 +203,7 @@ zzyutil/
 │       ├── forensics/   # Forensics tools
 │       ├── wireless/    # Wireless tools
 │       ├── rev/         # Reverse engineering tools
+│       ├── audit/       # Auditing & vulnerability scanning tools
 │       └── privesc/     # Privilege escalation tools
 └── tui/                 # Terminal UI binary crate
     ├── Cargo.toml
