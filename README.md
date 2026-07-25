@@ -128,7 +128,7 @@ sudo zzyutil --theme cyber
 | `dark` | Dark red/black theme (default) |
 | `compatible` | Simple high-contrast theme for terminals with limited color support |
 | `cyber` | Cyber green/hacker aesthetic |
-
+AND A FEW MORE
 ## Tool Categories
 
 ### Reconnaissance
