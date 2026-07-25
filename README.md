@@ -20,11 +20,15 @@ A terminal UI that organizes and runs cybersecurity tools from a browsable catal
 
 ### One-liner (recommended)
 
+Downloads the latest release with improved fuzzy search and 50+ tools.
+
 ```bash
 curl -fSL -o zzyutil "https://github.com/0xClumzzy/zzyutil/releases/latest/download/zzyutil" && curl -fSL -o zzyutil.sha256 "https://github.com/0xClumzzy/zzyutil/releases/latest/download/zzyutil.sha256" && sha256sum -c zzyutil.sha256 && chmod +x zzyutil && sudo install -m 0755 zzyutil /usr/local/bin/zzyutil
 ```
 
 ### Manual install
+
+Downloads the latest release with improved fuzzy search.
 
 ```bash
 # Download binary and checksum
